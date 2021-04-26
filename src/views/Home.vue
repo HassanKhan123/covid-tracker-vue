@@ -1,13 +1,20 @@
 <template>
-  <div class="home">
-    Hello world
-  </div>
+  <div class="home">Hello world</div>
 </template>
 
 <script>
-
-
 export default {
-  name: 'Home',
-}
+  name: "Home",
+  methods: {
+    async fetchCovidData() {
+      const res = await fetch("https://api.covid19api.com/summary");
+      const data = await res.json();
+      return data;
+    },
+  },
+  async created() {
+    const data = await this.fetchCovidData();
+    console.log(data);
+  },
+};
 </script>
